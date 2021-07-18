@@ -51,14 +51,14 @@ if not isfile("./datasets/"+dataset):
 	exit('Error: Dataset not found.')
 
 command_map = {
-	('pcso',False) : 'g++ -O2 -fopenmp -static-libstdc++ ./src/CPU/src_only_PC.cpp -o ./exec/CPU/pcso',
-	('pcsd',False) : 'g++ -O2 -fopenmp -static-libstdc++ ./src/CPU/src_dest_PC.cpp -o ./exec/CPU/pcsd',
-	('pcsobcc',False) : 'g++ -O2 -fopenmp -static-libstdc++ ./src/CPU/src_only_PC.cpp -o ./exec/CPU/pcsobcc',
-	('pcsdbcc',False) : 'g++ -O2 -fopenmp -static-libstdc++ ./src/CPU/src_dest_PC.cpp -o ./exec/CPU/pcsdbcc',
-	('pcso',True) : 'nvcc ./src/GPU/.cu -arch=sm_70 -std=c++11 -Xcompiler -fopenmp -O3 -o ./exec/GPU/pcso',
-	('pcsd',True) : 'nvcc ./src/GPU/.cu -arch=sm_70 -std=c++11 -Xcompiler -fopenmp -O3 -o ./exec/GPU/pcsd',
-	('pcsobcc',True) : 'nvcc ./src/GPU/.cu -arch=sm_70 -std=c++11 -Xcompiler -fopenmp -O3 -o ./exec/GPU/pcsobcc',
-	('pcsdbcc',True) : 'nvcc ./src/GPU/.cu -arch=sm_70 -std=c++11 -Xcompiler -fopenmp -O3 -o ./exec/GPU/pcsdbcc'
+	('pcso',False) : 'g++ -O2 -fopenmp -static-libstdc++ ./src/CPU/pc_src_only.cpp -o ./exec/CPU/pcso',
+	('pcsd',False) : 'g++ -O2 -fopenmp -static-libstdc++ ./src/CPU/pc_src_dest.cpp -o ./exec/CPU/pcsd',
+	('pcsobcc',False) : 'g++ -O2 -fopenmp -static-libstdc++ ./src/CPU/pc_src_only_bcc.cpp -o ./exec/CPU/pcsobcc',
+	('pcsdbcc',False) : 'g++ -O2 -fopenmp -static-libstdc++ ./src/CPU/pc_src_dest_bcc.cpp -o ./exec/CPU/pcsdbcc',
+	('pcso',True) : 'nvcc ./src/GPU/pc_src_only.cu -arch=sm_70 -std=c++11 -Xcompiler -fopenmp -O3 -o ./exec/GPU/pcso',
+	('pcsd',True) : 'nvcc ./src/GPU/pc_src_dest.cu -arch=sm_70 -std=c++11 -Xcompiler -fopenmp -O3 -o ./exec/GPU/pcsd',
+	('pcsobcc',True) : 'nvcc ./src/GPU/pc_src_only_bcc.cu -arch=sm_70 -std=c++11 -Xcompiler -fopenmp -O3 -o ./exec/GPU/pcsobcc',
+	('pcsdbcc',True) : 'nvcc ./src/GPU/pc_src_dest_bcc.cu -arch=sm_70 -std=c++11 -Xcompiler -fopenmp -O3 -o ./exec/GPU/pcsdbcc'
 }
 
 exec_map = {

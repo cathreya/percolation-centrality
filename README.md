@@ -14,7 +14,7 @@ This repo contains the implementations for both the versions of percolation cent
 
 ## Run
 
-The helper script `run.py` can be used to execute the existing programs. 
+The helper script `run.py` can be used to execute the programs on a Linux Environment. 
 ```
 usage: run.py [-h] [-a ALGO] [-d DATASET] [-o OUTFILE] [-t THREADS] [-g] [-r]
 
@@ -47,5 +47,5 @@ python run.py --algorithm pcso --dataset PGPgiantcompo.in
 
 To run the source destination version with BCC decomposition on the dataset `PGPgiantcompo.in` on GPU and store the output in `my_outfile.txt`,
 ```
-python run.py --algorithm pcsdbcc --dataset PGPgiantcompo.in -o my_outfile.txt
+python run.py --algorithm pcsdbcc --dataset PGPgiantcompo.in --gpu -o my_outfile.txt 
 ```
