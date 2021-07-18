@@ -1,32 +1,51 @@
 # percolation-centrality
 Programs corresponding to the work "Efficient Parallel Algorithms for Computing Percolation Centrality"
 
- We  present  parallel  algorithms  that  compute  thesource-based  and  source-destination  variants  of  the  percolationcentrality  values  of  nodes  in  a  network.  Our  algorithms  extend the   algorithm   of   Brandes,   introduce   optimizations   aimed   atexploiting  the  structural  properties  of  graphs,  and  extend  thealgorithmic  techniques  introduced  by  Sariyuce  et  al.  [26]  in  thecontext  of  centrality  computation.  Experimental  studies  of  ouralgorithms on an Intel Xeon(R) Silver 4116 CPU and an NvidiaTesla V100 GPU on a collection of 12 real-world graphs indicatethat  our  algorithmic  techniques  offer  a  significant  speedup.
+We  present  parallel  algorithms  that  compute  the source-based  and  source-destination  variants  of  the  percolation centrality  values  of  nodes  in  a  network.  Our  algorithms  extend the   algorithm   of   Brandes,   introduce   optimizations   aimed   at exploiting  the  structural  properties  of  graphs,  and  extend  the algorithmic  techniques  introduced  by  Sariyuce  et  al. in  the context  of  centrality  computation.  
 
-This repositary contains the implementations for both the versions of percolation on CPU and GPU respectively.
+This repo contains the implementations for both the versions of percolation centrality on CPU and GPU respectively.
 
 ## Dependencies
 
-- CUDA  Version  11.3 forprogramming the V100 GPU.
+- python 3.7+
+- CUDA  Version  11.3
 - g++ version 7.3.0 compiler
-- C++ along with OpenMP version 4.5
-
-## Dataset
-
-The graph instances used in the experiment can be found here : https://drive.google.com/drive/folders/1YAmc3DTl94kMpcWGQ1wUIS5AR43eYeao?usp=sharing
+- OpenMP version 4.5
 
 ## Run
 
-The compile instructions for the respective codes can be found as a comment inside the codes. 
+The helper script `run.py` can be used to execute the existing programs. 
+```
+usage: run.py [-h] [-a ALGO] [-d DATASET] [-o OUTFILE] [-t THREADS] [-g] [-r]
 
-To run the CPU codes use :
-```
-./cpu_src_only <input_file> <output_file> <num_threads>
-./cpu_src_dest <input_file> <output_file> <num_threads>
+Find source-based/source-destination-based percolation centrality
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a ALGO, --algorithm ALGO
+                        pcso - source-based percolation centrality, pcsd -
+                        source-destination-based percolation centrality
+                        pcsobcc - source-based percolation centrality with bcc
+                        decomposition pcsdbcc - source-destination-based
+                        percolation centrality with bcc decomposition
+  -d DATASET, --dataset DATASET
+                        The dataset to run on. Dataset must be present in
+                        ./datasets subdirectory. Look at existing datasets for
+                        the input format
+  -o OUTFILE, --outfile OUTFILE
+                        Output file name
+  -t THREADS, --cputhreads THREADS
+                        Number of OpenMP threads (max 48)
+  -g, --gpu             Run experiment of GPU (default: multicore CPU)
+  -r, --recompile       Recompile executables
 ```
 
-To run the GPU codes use :
+For example, to run the source only version on the dataset `PGPgiantcompo.in` on CPU,
 ```
-./gpu_src_only <input_file> <output_file>
-./gpu_src_dest <input_file> <output_file>
+python run.py --algorithm pcso --dataset PGPgiantcompo.in
+```
+
+To run the source destination version with BCC decomposition on the dataset `PGPgiantcompo.in` on GPU and store the output in `my_outfile.txt`,
+```
+python run.py --algorithm pcsdbcc --dataset PGPgiantcompo.in -o my_outfile.txt
 ```
