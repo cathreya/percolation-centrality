@@ -137,10 +137,7 @@ int main( int argc, char **argv ) {
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
 	cerr << "total time : " << duration << " mu.s." <<endl;
 	for(int i=1;i<=N;++i)
-	{
-		percolation[i] /= (sum-contri[i]);
 		fout << percolation[i] << "\n";
-	}
 
 	return 0;
 }
